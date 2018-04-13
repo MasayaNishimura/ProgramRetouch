@@ -56,7 +56,7 @@ public class BuyDataBeans  implements Serializable {
 
 	public String getFormatDate() {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日HH時mm分");
-		return sdf.format(buyDate);
+		return sdf.format(this.buyDate);
 	}
 	public int getDeliveryMethodPrice() {
 		return deliveryMethodPrice;

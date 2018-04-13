@@ -1,3 +1,4 @@
+<%@page import="beans.BuyDataBeans"%>
 <%@	page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -5,6 +6,9 @@
 <meta charset="UTF-8">
 <title>購入履歴詳細</title>
 <jsp:include page="/baselayout/head.html" />
+<%
+	BuyDataBeans bdb = (BuyDataBeans) session.getAttribute("bdb");
+%>
 </head>
 <body>
 	<jsp:include page="/baselayout/header.jsp" />
@@ -29,7 +33,7 @@
 							</thead>
 							<tbody>
 								<tr>
-									<td class="center">1234年56月78日90時12分</td>
+									<td class="center"></td>
 									<td class="center">サンプル</td>
 									<td class="center">123456789円</td>
 								</tr>
