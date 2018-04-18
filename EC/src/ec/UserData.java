@@ -45,7 +45,7 @@ public class UserData extends HttpServlet {
 			request.setAttribute("udb", udb);
 			ArrayList<BuyDataBeans> bdbArrayList = BuyDAO.getBuyDataBeansByUserId(userId);
 			session.setAttribute("bdbArrayList", bdbArrayList);
-			
+
 
 			request.getRequestDispatcher(EcHelper.USER_DATA_PAGE).forward(request, response);
 

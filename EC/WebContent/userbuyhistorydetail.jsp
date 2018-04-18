@@ -1,4 +1,7 @@
 <%@page import="beans.BuyDataBeans"%>
+<%@ page import="java.util.ArrayList"%>
+<%@ page import="beans.BuyDetailDataBeans"%>
+<%@ page import="beans.ItemDataBeans"%>
 <%@	page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -7,7 +10,10 @@
 <title>購入履歴詳細</title>
 <jsp:include page="/baselayout/head.html" />
 <%
-	BuyDataBeans bdb = (BuyDataBeans) session.getAttribute("bdb");
+	ArrayList<BuyDataBeans> bdb = (ArrayList<BuyDataBeans>) session.getAttribute("bdbArrayList");
+	ArrayList<BuyDetailDataBeans> detailArrayList = (ArrayList<BuyDetailDataBeans>) request.getAttribute("detailArrayList");
+	ArrayList<ItemDataBeans> idbArrayList = (ArrayList<ItemDataBeans>) request.getAttribute("idbArrayList");
+	BuyDataBeans bdb2 = (BuyDataBeans) request.getAttribute("bdb2");
 %>
 </head>
 <body>
@@ -33,9 +39,9 @@
 							</thead>
 							<tbody>
 								<tr>
-									<td class="center"></td>
-									<td class="center">サンプル</td>
-									<td class="center">123456789円</td>
+									<td class="center">${bdb2.getFormatDate()}</td>
+									<td class="center">${bdb2.deliveryMethodName}</td>
+									<td class="center">${bdb2.totalPrice + bdb2.deliveryMethodPrice}円</td>
 								</tr>
 							</tbody>
 						</table>
@@ -56,21 +62,15 @@
 								</tr>
 							</thead>
 							<tbody>
+							<% for (int i = 0; i < idbArrayList.size(); i++ ) {%>
 								<tr>
-									<td class="center">サンプル商品名1</td>
-									<td class="center">111111111円</td>
+									<td class="center"><%= idbArrayList.get(i).getName() %></td>
+									<td class="center"><%= idbArrayList.get(i).getPrice() %>円</td>
 								</tr>
+							<% } %>
 								<tr>
-									<td class="center">サンプル商品名2</td>
-									<td class="center">222222222円</td>
-								</tr>
-								<tr>
-									<td class="center">サンプル商品名3</td>
-									<td class="center">333333333円</td>
-								</tr>
-								<tr>
-									<td class="center">サンプル</td>
-									<td class="center">123456789円</td>
+									<td class="center">${bdb2.deliveryMethodName}</td>
+									<td class="center">${bdb2.deliveryMethodPrice}円</td>
 								</tr>
 							</tbody>
 						</table>

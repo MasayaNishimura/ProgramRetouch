@@ -130,4 +130,69 @@ public class BuyDetailDAO {
 		}
 	}
 
+	public ArrayList<BuyDetailDataBeans> getBuyDataDetailsById(int buyId) throws SQLException {
+		Connection con = null;
+		PreparedStatement st = null;
+		try {
+			con = DBManager.getConnection();
+
+			st = con.prepareStatement("select * from t_buy_detail where buy_id = ?;");
+			st.setInt(1, buyId);
+
+			ResultSet rs = st.executeQuery();
+			ArrayList<BuyDetailDataBeans> buyDetailList = new ArrayList<BuyDetailDataBeans>();
+
+			while (rs.next()) {
+				BuyDetailDataBeans bddb = new BuyDetailDataBeans();
+				bddb.setId(rs.getInt("id"));
+				bddb.setBuyId(rs.getInt("buy_id"));
+				bddb.setItemId(rs.getInt("item_id"));
+				buyDetailList.add(bddb);
+			}
+
+			System.out.println("searching BuyDataBeansList by BuyID has been completed");
+			return buyDetailList;
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			throw new SQLException(e);
+		} finally {
+			if (con != null) {
+				con.close();
+			}
+		}
+	}
+
+	public ArrayList<ItemDataBeans> getItemDataById(int buyId) throws SQLException {
+		Connection con = null;
+		PreparedStatement st = null;
+		try {
+			con = DBManager.getConnection();
+
+			st = con.prepareStatement("select * from t_buy_detail JOIN m_item on t_buy_detail.item_id\r\n" +
+					"= m_item.id where t_buy_detail.buy_id = ?;");
+			st.setInt(1, buyId);
+
+			ResultSet rs = st.executeQuery();
+			ArrayList<ItemDataBeans> itemDataList = new ArrayList<ItemDataBeans>();
+
+			while (rs.next()) {
+				ItemDataBeans idb = new ItemDataBeans();
+				idb.setId(rs.getInt("item_id"));
+				idb.setPrice(rs.getInt("price"));
+				idb.setName(rs.getString("name"));
+				itemDataList.add(idb);
+			}
+
+			System.out.println("searching BuyDataBeansList by BuyID has been completed");
+			return itemDataList;
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			throw new SQLException(e);
+		} finally {
+			if (con != null) {
+				con.close();
+			}
+		}
+	}
+
 }

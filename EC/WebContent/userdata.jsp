@@ -76,9 +76,9 @@
 								<% for (int i = 0; i < bdbArrayList.size(); i++) { %>
 								<tr>
 									<td class="center"><a href="UserBuyHistoryDetail?id=<%= bdbArrayList.get(i).getId() %>" class="btn-floating btn waves-effect waves-light "> <i class="material-icons">details</i></a></td>
-									<td class="center"><%= bdbArrayList.get(i).getBuyDate() %></td>
+									<td class="center"><%= bdbArrayList.get(i).getFormatDate() %></td>
 									<td class="center"><%= bdbArrayList.get(i).getDeliveryMethodName() %></td>
-									<td class="center"><%= bdbArrayList.get(i).getTotalPrice() %></td>
+									<td class="center"><%= bdbArrayList.get(i).getTotalPrice() +bdbArrayList.get(i).getDeliveryMethodPrice() %>円</td>
 								</tr>
 								<% } %>
 
